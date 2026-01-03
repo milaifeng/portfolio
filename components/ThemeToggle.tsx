@@ -1,7 +1,7 @@
 "use client";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
@@ -24,7 +24,7 @@ const ThemeToggle = () => {
         className={`transform transition-transform duration-500 ease-in-out w-4.5 h-4.5 rounded-full flex items-center justify-center ${
           theme === "light"
             ? "translate-x-0.5 bg-white"
-            : "translate-x-4 bg-black"
+            : "translate-x-4.5 bg-black"
         }`}
       >
         {theme === "light" ? (
