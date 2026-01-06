@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 
 import { useTheme } from "next-themes";
-import logoDrak from "@/public/logo.svg";
+import logoDark from "@/public/logo.svg";
 import logoLight from "@/public/logo-light.svg";
 const items = [
   { id: 0, label: "首页", href: "/" },
@@ -19,13 +19,18 @@ const items = [
 const Header = () => {
   const path = usePathname();
   const { theme } = useTheme();
-  const logoPath = theme === "light" ? logoDrak : logoLight;
   return (
     <header className="border-b border-gray-300 shadow-xs dark:border-[#000000] dark:bg-[#1b1b1f] transition-colors duration-300">
       <div className="max-w-6xl mx-auto flex justify-between h-18 items-center px-6">
-        <Link href="/">
-          <Image src={logoPath} alt="logo" height={60} />
-        </Link>
+        {theme === "light" ? (
+          <Link href="/">
+            <Image src={logoDark} alt="logo" height={60} />
+          </Link>
+        ) : (
+          <Link href="/">
+            <Image src={logoLight} alt="logo" height={60} />
+          </Link>
+        )}
 
         <div className="flex gap-6 items-center">
           <ul className="flex font-normal items-center justify-center gap-8 text-gray-500 ">
