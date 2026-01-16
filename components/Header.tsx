@@ -12,7 +12,7 @@ import logoDark from "@/public/logo.svg";
 import logoLight from "@/public/logo-light.svg";
 const items = [
   { id: 0, label: "首页", href: "/" },
-  { id: 1, label: "博客", href: "/blog" },
+  { id: 1, label: "博客", href: "/blogs" },
   { id: 2, label: "项目", href: "/projects" },
   { id: 3, label: "留言", href: "/guesbook" },
 ];
@@ -20,7 +20,7 @@ const Header = () => {
   const path = usePathname();
   const { theme } = useTheme();
   return (
-    <header className="border-b border-gray-300 shadow-xs dark:border-[#000000] dark:bg-[#1b1b1f] transition-colors duration-300">
+    <header className="fixed top-0 left-0 right-0 border-b border-gray-300 shadow-xs bg-white dark:border-[#000000] dark:bg-[#1b1b1f] transition-colors duration-300">
       <div className="max-w-6xl mx-auto flex justify-between h-18 items-center px-6">
         {theme === "light" ? (
           <Link href="/">

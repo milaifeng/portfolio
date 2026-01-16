@@ -1,0 +1,22 @@
+export const metadata = {
+  title: "Test2",
+  description:
+    "剖析 Next.js（以当前主流的 15.x 版本为准）中的水合机制，并分享常见问题与优化方案。",
+  date: "2025-1-10",
+  tags: ["Next.js", "MDX", "Typescript"],
+};
+
+这个设计大幅减少了需要水合的 JavaScript 体积，相比传统的 Pages Router，水合负担更轻。
+
+1. **Hydration Mismatch 错误**  
+   最经典的报错：`Text content does not match server-rendered HTML`。  
+   原因通常是：
+
+   - 服务器和客户端渲染逻辑不一致（如 Date、random、浏览器 API）
+   - 第三方组件在服务器渲染时输出不同内容
+
+2. **水合性能瓶颈**  
+   大量 Client Components 导致传输的 JavaScript 过多，水合时间变长。
+
+3. **最大化使用 Server Components**  
+   将尽可能多的组件保持为 Server Components，只在需要交互的地方使用 Client Components。
