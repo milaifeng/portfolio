@@ -26,13 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh" suppressHydrationWarning>
+    <html lang="zh" suppressHydrationWarning={true}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-[#1b1b1f] transition-colors duration-300`}
       >
         <Providers>
           <Header />
-          <main className="max-w-6xl p-18 h-screen mx-auto px-6">
+          <main className="max-w-6xl p-18 min-h-screen mx-auto px-6">
             {children}
           </main>
           <Footer />

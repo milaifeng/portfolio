@@ -1,24 +1,41 @@
 import Link from "next/link";
 import Image from "next/image";
 import gitHub from "@/public/github.png";
-import gmail from "@/public/gmail.png";
-import weChat from "@/public/wechat.svg";
-const SignUpform = () => {
+import google from "@/public/google.svg";
+import qq from "@/public/QQ.svg";
+const SignUpform = ({ isActive }: { isActive: boolean }) => {
   return (
-    <div className="w-1/2 flex flex-col gap-6 h-full px-4 justify-center items-center">
-      <h1 className="font-semibold text-2xl text-neutral-700">用户注册</h1>
+    <div
+      className={`absolute inset-y-0 left-0 w-1/2 flex flex-col gap-6 h-full px-4 justify-center items-center transition-all duration-600 ease-in-out 
+        ${isActive ? "translate-x-full opacity-100 z-50" : "opacity-0 z-10"}`}
+    >
+      <h1 className="font-semibold text-2xl text-neutral-700 dark:text-neutral-300">
+        用户注册
+      </h1>
       <div className="flex gap-8">
-        <Link href="#">
+        <button
+          onClick={() => {}}
+          type="button"
+          className="size-10 cursor-pointer rounded-xl border border-neutral-300 flex items-center justify-center p-2 hover:bg-neutral-200/50 transition"
+        >
           <Image src={gitHub} alt="github" height={26} />
-        </Link>
-        <Link href="#">
-          <Image src={gmail} alt="gmail" height={26} />
-        </Link>
-        <Link href="#">
-          <Image src={weChat} alt="wechat" height={26} />
-        </Link>
+        </button>
+        <button
+          onClick={() => {}}
+          type="button"
+          className="size-10 cursor-pointer rounded-xl border border-neutral-300 flex items-center justify-center p-2 hover:bg-neutral-200/50 transition"
+        >
+          <Image src={google} alt="google" height={26} />
+        </button>
+        <button
+          onClick={() => {}}
+          type="button"
+          className="size-10 cursor-pointer rounded-xl border border-neutral-300 flex items-center justify-center p-2 hover:bg-neutral-200/50 transition"
+        >
+          <Image src={qq} alt="qq" height={26} width={26} className="size-8" />
+        </button>
       </div>
-      <p>使用第三方账号注册</p>
+      <p className="dark:text-neutral-300">使用第三方账号登录</p>
       <form
         action="#"
         className="flex w-full flex-col justify-center items-center gap-2"
@@ -42,9 +59,9 @@ const SignUpform = () => {
           <input
             type="text"
             placeholder="验证码"
-            className="w-2/3 outline-none"
+            className="w-3/5 outline-none"
           />
-          <div className="w-1/3 bg-blue-500 text-white text-center px-4 py-2 rounded-xl cursor-pointer">
+          <div className="w-2/5 bg-blue-500 text-white text-center px-4 py-2 rounded-xl cursor-pointer">
             获取验证码
           </div>
         </div>

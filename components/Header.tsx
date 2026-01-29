@@ -20,7 +20,7 @@ const Header = () => {
   const path = usePathname();
   const { theme } = useTheme();
   return (
-    <header className="fixed top-0 left-0 right-0 border-b border-gray-300 shadow-xs bg-white dark:border-[#000000] dark:bg-[#1b1b1f] transition-colors duration-300">
+    <header className="fixed top-0 left-0 right-0 border-b border-gray-300 shadow-xs bg-white dark:border-[#000000] dark:bg-[#1b1b1f] transition-colors duration-300 z-100">
       <div className="max-w-6xl mx-auto flex justify-between h-18 items-center px-6">
         {theme === "light" ? (
           <Link href="/">

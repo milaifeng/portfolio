@@ -4,7 +4,18 @@ import createMDX from "@next/mdx";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  reactStrictMode: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
 
 const withMDX = createMDX({});
