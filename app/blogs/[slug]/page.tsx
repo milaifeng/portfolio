@@ -1,4 +1,4 @@
-import { getAllSortedPosts } from "@/app/blogs/utils";
+import { getLatestPosts } from "@/app/blogs/utils";
 type BlogPageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -52,7 +52,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
 }
 
 export async function generateStaticParams() {
-  const post = await getAllSortedPosts();
+  const post = await getLatestPosts();
   const slug = post.map((item) => {
     return { slug: item.slug };
   });

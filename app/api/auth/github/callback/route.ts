@@ -42,8 +42,10 @@ export async function POST(request: Request) {
   });
   const userData = await userResponse.json();
   session.user = {
-    name: userData.name || userData.login,
+    id: userData.id,
+    username: userData.name || userData.login,
     avatar: userData.avatar_url,
+    email: userData.email,
   };
   await session.save();
   return NextResponse.json({

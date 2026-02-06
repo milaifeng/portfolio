@@ -11,7 +11,7 @@ const BlogsCard = (props: BlogsCardProps) => {
   return (
     <Link
       href={`/blogs/${props.slug}`}
-      className="block p-4 border border-neutral-300 dark:border-neutral-700 rounded-lg hover:shadow-lg hover:border-[#B85CF6] transition-shadow duration-300 group"
+      className="relative block h-35 p-4 border border-neutral-300 dark:border-neutral-700 rounded-lg hover:shadow-lg hover:border-[#B85CF6] transition-shadow duration-300 group"
     >
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-md font-semibold group-hover:text-[#B85CF6]">
@@ -24,7 +24,7 @@ const BlogsCard = (props: BlogsCardProps) => {
       <p className="line-clamp-2 text-neutral-600 dark:text-neutral-400 my-2 text-sm">
         {props.description}
       </p>
-      <div className="flex gap-2 mt-2">
+      <div className="absolute bottom-2 flex gap-2 mt-2">
         {props.tags.map((tag) => (
           <span
             key={tag}

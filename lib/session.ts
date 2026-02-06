@@ -2,10 +2,14 @@ import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 
 export interface SessionData {
+  captchaText?: string;
+  captchaExpire?: number;
   oauthState?: string;
   user?: {
-    name: string;
+    id: number;
+    username: string;
     avatar: string;
+    email: string;
   };
 }
 

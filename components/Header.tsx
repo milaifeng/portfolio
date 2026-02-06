@@ -14,7 +14,7 @@ const items = [
   { id: 0, label: "首页", href: "/" },
   { id: 1, label: "博客", href: "/blogs" },
   { id: 2, label: "项目", href: "/projects" },
-  { id: 3, label: "留言", href: "/guesbook" },
+  { id: 3, label: "留言", href: "/guestbook" },
 ];
 const Header = () => {
   const path = usePathname();

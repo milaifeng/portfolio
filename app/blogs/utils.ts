@@ -8,8 +8,9 @@ type BlogPostMetadata = {
   tags: string[];
 };
 export const BLOGS_PATH = path.join(process.cwd(), "contents", "blogs");
+const POSTS_PER_PAGE = 10;
 export async function readDirFiles(
-  dirPath: string
+  dirPath: string,
 ): Promise<BlogPostMetadata[]> {
   try {
     const files = fs.readdirSync(dirPath, { withFileTypes: true });
@@ -62,4 +63,45 @@ export async function getLatestPosts(limit = 6): Promise<BlogPostMetadata[]> {
 // 博客列表页：全部按时间排序
 export async function getAllSortedPosts(): Promise<BlogPostMetadata[]> {
   return await getAllPosts();
+}
+
+export async function getAllPostTags(): Promise<string[]> {
+  const posts = await getAllPosts();
+  const tagSet: Set<string> = new Set();
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      tagSet.add(tag);
+    });
+  });
+  return Array.from(tagSet);
+}
+
+export async function getPaginatedPosts(currentPage: number = 1) {
+  const allPosts = await getAllSortedPosts(); // 全量博客
+  const totalPosts = allPosts.length;
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+
+  // 修正非法页码
+  const validPage = Math.max(1, Math.min(currentPage, totalPages || 1));
+  const startIndex = (validPage - 1) * POSTS_PER_PAGE;
+  const postsForPage = allPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+
+  // 生成页码数组（智能显示）
+  const getPageNumbers = () => {
+    const pages: number[] = [];
+    const maxVisible = 5;
+    let start = Math.max(1, validPage - 2);
+    const end = Math.min(totalPages, start + maxVisible - 1);
+    if (end - start + 1 < maxVisible) start = Math.max(1, end - maxVisible + 1);
+    for (let i = start; i <= end; i++) pages.push(i);
+    return pages;
+  };
+
+  return {
+    posts: postsForPage,
+    totalPages,
+    currentPage: validPage,
+    pageNumbers: getPageNumbers(),
+    allPosts, // 如果分类需要全量计数
+  };
 }

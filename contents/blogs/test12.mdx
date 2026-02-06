@@ -1,0 +1,13 @@
+export const metadata = {
+  title: "Test1",
+  description:
+    "剖析 Next.js（以当前主流的 15.x 版本为准）中的水合机制，并分享常见问题与优化方案。",
+  date: "2025-1-11",
+  tags: ["Next.js", "MDX", "Typescript"],
+};
+
+在 Next.js App Router 中：
+
+- Server Components 默认在服务器渲染，不参与客户端水合
+- Client Components（标记 "use client"）才会参与水合
+- 水合时，React 会将服务器生成的 HTML 与客户端虚拟 DOM 进行匹配（reconcile），然后绑定事件监听器

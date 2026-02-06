@@ -3,7 +3,7 @@ const DiscussCard = () => {
   return (
     <div className="flex w-2xl h-32 border bg-white border-neutral-300 rounded-lg dark:bg-white p-4">
       <Image
-        src="/user.jpg"
+        src="/avatar/monkey1.jpg"
         alt="user"
         width={40}
         height={40}
