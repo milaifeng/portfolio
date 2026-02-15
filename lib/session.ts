@@ -9,7 +9,7 @@ export interface SessionData {
     id: number;
     username: string;
     avatar: string;
-    email: string;
+    email: string | null;
   };
 }
 

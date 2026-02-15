@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import bcrypt from "bcrypt";
 import { db } from "@/db";
-import { users } from "@/db/schema";
+import { users } from "@/db/schema/users";
 import { eq } from "drizzle-orm";
 export async function POST(request: NextRequest) {
   const session = await getSession();

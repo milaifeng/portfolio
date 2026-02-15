@@ -6,7 +6,7 @@ import google from "@/public/google.svg";
 import qq from "@/public/QQ.svg";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import Loading from "@/components/Loading";
+import SignStatusCard from "../SignStatusCard";
 
 const SignInForm = ({ isActive }: { isActive: boolean }) => {
   const searchParams = useSearchParams();
@@ -15,7 +15,10 @@ const SignInForm = ({ isActive }: { isActive: boolean }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const loginGithub = async () => {
     const response = await fetch("/api/auth/github/login");
     const data = await response.json();
@@ -26,7 +29,8 @@ const SignInForm = ({ isActive }: { isActive: boolean }) => {
   };
 
   const loginPassword = async () => {
-    setLoading(true);
+    setStatus("loading");
+    setMessage("正在登录...");
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
@@ -39,22 +43,25 @@ const SignInForm = ({ isActive }: { isActive: boolean }) => {
 
       const data = await response.json();
       if (data.success) {
-        // 登录成功，跳转到留言板或其他页面
-        router.push("/guestbook");
-        // 可选：刷新 session 或全局状态
+        setStatus("success");
+        setMessage("登录成功！");
+        setTimeout(() => {
+          router.replace("/guestbook");
+        }, 2000);
       } else {
-        alert(data.message || "登录失败");
+        setStatus("error");
+        setMessage(data.message || "用户名或密码错误");
       }
     } catch {
-      alert("网络错误");
-    } finally {
-      setLoading(false);
+      setStatus("error");
+      setMessage("网络异常，请稍后重试");
     }
   };
   useEffect(() => {
     if (!code && !returnedState) return;
     const handleCallback = async () => {
-      setLoading(true);
+      setStatus("loading");
+      setMessage("正在登录...");
       try {
         const response = await fetch("/api/auth/github/callback", {
           method: "POST",
@@ -64,86 +71,100 @@ const SignInForm = ({ isActive }: { isActive: boolean }) => {
           body: JSON.stringify({ code, returnedState }),
         });
         if (!response.ok) {
-          throw new Error("登录失败");
+          setStatus("error");
+          setMessage("第三方登录失败，请重试");
         }
         const data = await response.json();
         if (data.success) {
-          router.replace("/guesbook");
+          router.replace("/guestbook");
         }
       } catch {
-        alert("登录失败，请重试！");
-      } finally {
-        setLoading(false);
+        setStatus("error");
+        setMessage("登录失败，请重试");
       }
     };
     handleCallback();
   }, [code, returnedState, router]);
-  return loading ? (
-    <Loading />
-  ) : (
-    <div
-      className={`absolute inset-y-0 left-0 w-1/2 flex items-center justify-center transition-all duration-600 ease-in-out z-20 ${isActive ? "translate-x-full opacity-0" : "translate-x-0"}`}
-    >
-      <form className=" w-full flex flex-col gap-6 h-full px-4 justify-center items-center">
-        <h1 className="font-semibold text-2xl text-neutral-700 dark:text-neutral-300">
-          用户登录
-        </h1>
-        <div className="flex gap-8">
+  return (
+    <>
+      <div
+        className={`absolute inset-y-0 left-0 w-1/2 flex items-center justify-center transition-all duration-600 ease-in-out z-20 ${isActive ? "translate-x-full opacity-0" : "translate-x-0"}`}
+      >
+        <form className=" w-full flex flex-col gap-6 h-full px-4 justify-center items-center">
+          <h1 className="font-semibold text-2xl text-neutral-700 dark:text-neutral-300">
+            用户登录
+          </h1>
+          <div className="flex gap-8">
+            <button
+              onClick={loginGithub}
+              type="button"
+              className="size-10 cursor-pointer rounded-xl border border-neutral-300 flex items-center justify-center p-2 hover:bg-neutral-200/50 transition"
+            >
+              <Image src={gitHub} alt="github" height={26} />
+            </button>
+            <button
+              onClick={() => {}}
+              type="button"
+              className="size-10 cursor-pointer rounded-xl border border-neutral-300 flex items-center justify-center p-2 hover:bg-neutral-200/50 transition"
+            >
+              <Image src={google} alt="google" height={26} />
+            </button>
+            <button
+              onClick={() => {}}
+              type="button"
+              className="size-10 cursor-pointer rounded-xl border border-neutral-300 flex items-center justify-center p-2 hover:bg-neutral-200/50 transition"
+            >
+              <Image
+                src={qq}
+                alt="qq"
+                height={26}
+                width={26}
+                className="size-8"
+              />
+            </button>
+          </div>
+          <p className="dark:text-neutral-300">使用第三方账号登录</p>
+          <input
+            type="text"
+            placeholder="用户名"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full border-b border-neutral-300 outline-none p-2"
+          />
+          <input
+            type="password"
+            placeholder="密码"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border-b border-neutral-300 outline-none p-2"
+          />
           <button
-            onClick={loginGithub}
+            className="bg-blue-500 text-white px-6 py-2 rounded-xl cursor-pointer"
             type="button"
-            className="size-10 cursor-pointer rounded-xl border border-neutral-300 flex items-center justify-center p-2 hover:bg-neutral-200/50 transition"
+            onClick={loginPassword}
           >
-            <Image src={gitHub} alt="github" height={26} />
+            登录
           </button>
-          <button
-            onClick={() => {}}
-            type="button"
-            className="size-10 cursor-pointer rounded-xl border border-neutral-300 flex items-center justify-center p-2 hover:bg-neutral-200/50 transition"
-          >
-            <Image src={google} alt="google" height={26} />
-          </button>
-          <button
-            onClick={() => {}}
-            type="button"
-            className="size-10 cursor-pointer rounded-xl border border-neutral-300 flex items-center justify-center p-2 hover:bg-neutral-200/50 transition"
-          >
-            <Image
-              src={qq}
-              alt="qq"
-              height={26}
-              width={26}
-              className="size-8"
-            />
-          </button>
-        </div>
-        <p className="dark:text-neutral-300">使用第三方账号登录</p>
-        <input
-          type="text"
-          placeholder="用户名"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full border-b border-neutral-300 outline-none p-2"
+          <Link className="text-xs" href="#">
+            忘记密码？
+          </Link>
+        </form>
+      </div>
+      {status !== "idle" && (
+        <SignStatusCard
+          status={
+            status === "loading"
+              ? "loading"
+              : status === "success"
+                ? "success"
+                : "error"
+          }
+          message={message}
+          onClose={() => setStatus("idle")}
+          autoClose={status === "success" ? 2000 : 4000}
         />
-        <input
-          type="password"
-          placeholder="密码"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border-b border-neutral-300 outline-none p-2"
-        />
-        <button
-          className="bg-blue-500 text-white px-6 py-2 rounded-xl cursor-pointer"
-          type="button"
-          onClick={loginPassword}
-        >
-          登录
-        </button>
-        <Link className="text-xs" href="#">
-          忘记密码？
-        </Link>
-      </form>
-    </div>
+      )}
+    </>
   );
 };
 
