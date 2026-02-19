@@ -14,7 +14,6 @@ export async function POST(request: Request) {
   }
 
   delete session.oauthState;
-
   const tokenResponse = await fetch(
     "https://github.com/login/oauth/access_token",
     {
