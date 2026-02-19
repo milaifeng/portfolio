@@ -25,8 +25,7 @@ export async function readDirFiles(
     });
     const blogPostsPromises = await Promise.all(blogPosts);
     return blogPostsPromises;
-  } catch (error) {
-    console.error(`Error reading directory ${dirPath}:`, error);
+  } catch {
     return [];
   }
 }

@@ -12,7 +12,7 @@ export default async function Home() {
       </section>
       <div className="border-t border-neutral-300 dark:border-neutral-700 p-4">
         <h2 className="my-8 text-2xl font-semibold">最新文章</h2>
-        <div className="grid grid-flow-col grid-rows-2 grid-cols-3 gap-6">
+        <div className="grid  grid-cols-3 gap-6">
           {blogPosts.map((post) => (
             <BlogsCard
               key={post.slug}
