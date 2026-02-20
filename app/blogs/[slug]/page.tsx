@@ -59,4 +59,4 @@ export async function generateStaticParams() {
   return slug;
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;
