@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "米莱峰博客",
-  description: "这是米莱峰的个人博客",
+  description: "这是米莱峰前端技术分析博客",
 };
 
 export default function RootLayout({

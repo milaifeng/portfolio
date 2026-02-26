@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     container_name: blog-nextjs
     volumes:
-      - /home/ubuntu/project/blogs:/contents/blogs
+      - /home/mlf/projects/blogs:/app/contents/blogs
     ports:
       - "3000:3000"
     env_file:

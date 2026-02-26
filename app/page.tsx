@@ -1,3 +1,4 @@
+export const revalidate = 60;
 import Terminal from "@/components/home/Terminal";
 import InfoCard from "@/components/home/InfoCard";
 import BlogsCard from "@/components/home/blogsCard";
@@ -10,7 +11,7 @@ export default async function Home() {
         <Terminal />
         <InfoCard />
       </section>
-      <div className="border-t border-neutral-300 dark:border-neutral-700 p-4">
+      <div className="border-t border-neutral-300 dark:border-neutral-700 p-4 mb-12">
         <h2 className="my-8 text-2xl font-semibold">最新文章</h2>
         <div className="grid  grid-cols-3 gap-6">
           {blogPosts.map((post) => (
@@ -25,7 +26,12 @@ export default async function Home() {
           ))}
         </div>
       </div>
-      <div>最新项目</div>
+      <div>
+        <div className="border-t border-neutral-300 dark:border-neutral-700 p-4">
+          <h2 className="my-8 text-2xl font-semibold">最新项目</h2>
+          
+        </div>
+      </div>
     </div>
   );
 }

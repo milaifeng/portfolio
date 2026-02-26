@@ -29,7 +29,7 @@ const InfoCard = () => {
           <Mail size={24} className="w-6 h-6 text-neutral-500" />
         </Link>
         <Link
-          href="/guesbook"
+          href="/guestbook"
           className="w-full h-10 flex justify-center items-center"
         >
           <BookOpen size={24} className="w-6 h-6 text-neutral-500" />

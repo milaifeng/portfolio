@@ -1,21 +1,23 @@
-import Link from "next/link";
-import { getAllPostTags, getPaginatedPosts } from "./utils";
-import BlogsCard from "@/components/home/blogsCard";
-const BlogPage = async ({
+import Link from 'next/link';
+import BlogsCard from '@/components/home/blogsCard';
+import { getPaginatedPosts, getAllPostTags } from './utils';
+
+// export const dynamic = 'force-dynamic'; 
+export const revalidate = 60; 
+
+export default async function BlogPage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string }>;
-}) => {
+}) {
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
-  const {
-    posts,
-    totalPages,
-    currentPage: validPage,
-    pageNumbers,
-    allPosts,
-  } = await getPaginatedPosts(currentPage);
+
+  const { posts, totalPages, currentPage: validPage, pageNumbers, allPosts } =
+    await getPaginatedPosts(currentPage);
+
   const tagSet = await getAllPostTags();
+
   return (
     <div className="flex justify-between min-h-screen pt-12 px-4 gap-8">
       <div className="flex flex-col flex-1">
@@ -31,34 +33,48 @@ const BlogPage = async ({
             />
           ))}
         </div>
+
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-4 mt-10">
             <Link
               href={`/blogs?page=${validPage - 1}`}
-              className={`px-4 py-2 rounded-lg ${validPage === 1 ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-blue-500 text-white"}`}
+              className={`px-4 py-2 rounded-lg ${
+                validPage === 1
+                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  : 'bg-blue-500 text-white'
+              }`}
             >
               上一页
             </Link>
 
-            {pageNumbers.map((page) => (
+            {pageNumbers.map((p) => (
               <Link
-                key={page}
-                href={`/blogs?page=${page}`}
-                className={`px-4 py-2 rounded-lg ${page === validPage ? "bg-gray-300/50 text-blue-500" : "dark:bg-white bg-blue-500 text-white"}`}
+                key={p}
+                href={`/blogs?page=${p}`}
+                className={`px-4 py-2 rounded-lg ${
+                  p === validPage
+                    ? 'bg-gray-300/50 text-blue-500'
+                    : 'dark:bg-white bg-blue-500 text-white'
+                }`}
               >
-                {page}
+                {p}
               </Link>
             ))}
 
             <Link
               href={`/blogs?page=${validPage + 1}`}
-              className={`px-4 py-2 rounded-lg ${validPage === totalPages ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-blue-500 text-white"}`}
+              className={`px-4 py-2 rounded-lg ${
+                validPage === totalPages
+                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  : 'bg-blue-500 text-white'
+              }`}
             >
               下一页
             </Link>
           </div>
         )}
       </div>
+
       <div className="flex flex-col max-w-xs w-full shrink-0 sticky top-18 self-start">
         <h2 className="text-xl font-semibold pb-5 mb-5 border-b border-gray-300">
           分类
@@ -77,6 +93,4 @@ const BlogPage = async ({
       </div>
     </div>
   );
-};
-
-export default BlogPage;
+}
