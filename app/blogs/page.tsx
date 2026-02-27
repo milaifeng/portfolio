@@ -1,9 +1,8 @@
+export const revalidate = 60 * 60 * 24;
+
 import Link from 'next/link';
 import BlogsCard from '@/components/home/blogsCard';
 import { getPaginatedPosts, getAllPostTags } from './utils';
-
-// export const dynamic = 'force-dynamic'; 
-export const revalidate = 60; 
 
 export default async function BlogPage({
   searchParams,

@@ -1,3 +1,4 @@
+export const revalidate = 60 * 60 * 24;
 import { notFound } from 'next/navigation';
 import fs from 'fs/promises';
 import path from 'path';
@@ -6,9 +7,6 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import Back from '@/components/blog/Back';
 import type { Metadata } from "next";
 
-// 强制运行时渲染（每次请求都重新读取文件）
-// export const dynamic = 'force-dynamic';
-export const revalidate = 60;
 export async function generateMetadata({
   params,
 }: {

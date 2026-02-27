@@ -1,4 +1,5 @@
-export const revalidate = 60;
+export const revalidate = 60 * 60 * 24;
+
 import Terminal from "@/components/home/Terminal";
 import InfoCard from "@/components/home/InfoCard";
 import BlogsCard from "@/components/home/blogsCard";
@@ -6,7 +7,7 @@ import { getLatestPosts } from "@/app/blogs/utils";
 export default async function Home() {
   const blogPosts = await getLatestPosts(6);
   return (
-    <div>
+    <>
       <section className="flex py-12 justify-between">
         <Terminal />
         <InfoCard />
@@ -26,12 +27,6 @@ export default async function Home() {
           ))}
         </div>
       </div>
-      <div>
-        <div className="border-t border-neutral-300 dark:border-neutral-700 p-4">
-          <h2 className="my-8 text-2xl font-semibold">最新项目</h2>
-          
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

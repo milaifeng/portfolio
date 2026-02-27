@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Search from "@/components/home/Search";
 import ThemeToggle from "@/components/ThemeToggle";
 
 import { useTheme } from "next-themes";
@@ -13,8 +12,7 @@ import logoLight from "@/public/logo-light.svg";
 const items = [
   { id: 0, label: "首页", href: "/" },
   { id: 1, label: "博客", href: "/blogs" },
-  { id: 2, label: "项目", href: "/projects" },
-  { id: 3, label: "留言", href: "/guestbook" },
+  { id: 2, label: "留言", href: "/guestbook" },
 ];
 const Header = () => {
   const path = usePathname();
@@ -48,10 +46,7 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <Button className="w-25 justify-start gap-4 border border-gray-500 rounded-3xl text-gray-500">
-            <Search />
-            <span>搜索</span>
-          </Button>
+          <Search />
           <ThemeToggle />
         </div>
       </div>
