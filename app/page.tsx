@@ -1,4 +1,4 @@
-export const revalidate = 60 * 60 * 24;
+export const revalidate = 43200; //12小时
 
 import Terminal from "@/components/home/Terminal";
 import InfoCard from "@/components/home/InfoCard";

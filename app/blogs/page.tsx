@@ -1,8 +1,8 @@
-export const revalidate = 60 * 60 * 24;
+export const revalidate = 43200;
 
-import Link from 'next/link';
-import BlogsCard from '@/components/home/blogsCard';
-import { getPaginatedPosts, getAllPostTags } from './utils';
+import Link from "next/link";
+import BlogsCard from "@/components/home/blogsCard";
+import { getPaginatedPosts, getAllPostTags } from "./utils";
 
 export default async function BlogPage({
   searchParams,
@@ -12,8 +12,13 @@ export default async function BlogPage({
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
 
-  const { posts, totalPages, currentPage: validPage, pageNumbers, allPosts } =
-    await getPaginatedPosts(currentPage);
+  const {
+    posts,
+    totalPages,
+    currentPage: validPage,
+    pageNumbers,
+    allPosts,
+  } = await getPaginatedPosts(currentPage);
 
   const tagSet = await getAllPostTags();
 
@@ -39,8 +44,8 @@ export default async function BlogPage({
               href={`/blogs?page=${validPage - 1}`}
               className={`px-4 py-2 rounded-lg ${
                 validPage === 1
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  : 'bg-blue-500 text-white'
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-blue-500 text-white"
               }`}
             >
               上一页
@@ -52,8 +57,8 @@ export default async function BlogPage({
                 href={`/blogs?page=${p}`}
                 className={`px-4 py-2 rounded-lg ${
                   p === validPage
-                    ? 'bg-gray-300/50 text-blue-500'
-                    : 'dark:bg-white bg-blue-500 text-white'
+                    ? "bg-gray-300/50 text-blue-500"
+                    : "dark:bg-white bg-blue-500 text-white"
                 }`}
               >
                 {p}
@@ -64,8 +69,8 @@ export default async function BlogPage({
               href={`/blogs?page=${validPage + 1}`}
               className={`px-4 py-2 rounded-lg ${
                 validPage === totalPages
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  : 'bg-blue-500 text-white'
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-blue-500 text-white"
               }`}
             >
               下一页
