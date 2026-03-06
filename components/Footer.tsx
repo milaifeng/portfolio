@@ -4,9 +4,9 @@ const Footer = () => {
   return (
     <footer>
       <div className="w-full border-t border-t-neutral-300 bg-white py-8 mt-12 flex justify-center dark:bg-neutral-900 dark:border-t-neutral-700 text-sm text-center gap-4">
-        ©milaifeng.cn ICP备案号:
+        ©milaifeng.cn
         <Link href="https://beian.miit.gov.cn/" target="_blank">
-          冀ICP备2026005449号
+          ICP备案号: 冀ICP备2026005449号
         </Link>
       </div>
     </footer>
