@@ -24,7 +24,7 @@ const BlogsCard = (props: BlogsCardProps) => {
       <p className="line-clamp-2 text-neutral-600 dark:text-neutral-400 my-2 text-sm">
         {props.description}
       </p>
-      <div className="absolute bottom-2 flex gap-2 mt-2">
+      <div className="absolute bottom-3 flex gap-2 mt-2">
         {props.tags.map((tag) => (
           <span
             key={tag}

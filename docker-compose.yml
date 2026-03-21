@@ -7,7 +7,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      -"5432:5432"
+      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 10s
@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: blog-nextjs
     volumes:
-      - /home/mlf/projects/blogs:/app/contents/blogs
+      - /home/ubuntu/project/blogs:/app/contents/blogs
     ports:
       - "3000:3000"
     env_file:
@@ -37,9 +37,11 @@ services:
     image: nginx:alpine
     container_name: blog-nginx
     ports:
-      - "80:80"          # 只暴露 80
+      - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /home/ubuntu/project/https:/etc/nginx/ssl:ro  
     depends_on:
       - nextjs
     healthcheck:

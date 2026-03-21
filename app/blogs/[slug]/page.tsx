@@ -1,4 +1,4 @@
-export const revalidate = 43200;
+export const revalidate = 3600;
 import { notFound } from "next/navigation";
 import fs from "fs/promises";
 import path from "path";
@@ -91,33 +91,31 @@ export default async function BlogPage({ params }: BlogPageProps) {
   }).format(dateRaw);
 
   return (
-    <div className="flex flex-col items-center gap-6 py-6">
-      <div className="mx-auto w-full max-w-3xl">
-        <article className="w-full prose dark:prose-invert p-6">
-          <Back />
-          <div className="mt-6 mb-8">
-            <h1 className="mb-2 text-4xl font-bold dark:text-blue-500">
+    <div className="flex flex-col items-center gap-6">
+      <div className="mx-auto w-full px-4 sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
+        <article className="prose prose-sm sm:prose-base md:prose-base lg:prose-base xl:prose-base max-w-none dark:prose-invert px-4">
+          <div className="">
+            <h4 className="text-4xl mb-2 font-bold dark:text-blue-500 ">
               {title}
-            </h1>
-            <div className="flex items-center gap-2 py-2">
-              <span className="text-sm">{formattedDate}</span> |
-              <div className="flex gap-1">
-                {tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-blue-500 border-foreground rounded-full border px-2 py-1 text-xs"
-                  >
-                    {tag}
-                  </span>
-                ))}
+            </h4>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2 py-2">
+                <span className="text-sm md:text-base">{formattedDate}</span> |
+                <div className="flex gap-1">
+                  {tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-blue-500 border-foreground rounded-full border px-2 py-1 text-xs"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
+              <Back />
             </div>
           </div>
-          <MDXRemote
-            source={content}
-            // 可选：如果你在 MDX 中用了自定义组件，可以在这里传入
-            // components={{ YourCustomComponent }}
-          />
+          <MDXRemote source={content} />
         </article>
       </div>
     </div>

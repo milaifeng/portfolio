@@ -4,21 +4,22 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @utility prose-invert {
-  --tw-prose-invert-body: #d1d5db;          /* 正文：gray-300，舒适可读 */
-  --tw-prose-invert-headings: #60a5fa;      /* 标题：blue-400（接近你的 blue-500，但稍柔和） */
-  --tw-prose-invert-lead: #9ca3af;          /* lead 段落 */
-  --tw-prose-invert-links: #93c5fd;         /* 链接：blue-300，突出 */
-  --tw-prose-invert-bold: #f3f4f6;          /* 加粗文字：接近 white */
-  --tw-prose-invert-counters: #9ca3af;      /* 编号/项目符号 */
-  --tw-prose-invert-bullets: #9ca3af;
-  --tw-prose-invert-hr: #4b5563;            /* 分隔线：gray-600 */
-  --tw-prose-invert-quotes: #9ca3af;        /* 引用文字 */
-  --tw-prose-invert-quote-borders: #4b5563; /* 引用边框 */
-  --tw-prose-invert-code: #f472b6;          /* 行内代码：pink-400 */
-  --tw-prose-invert-pre-code: #e5e7eb;      /* 代码块内文字：gray-200 */
-  --tw-prose-invert-pre-bg: #111827;        /* 代码块背景：gray-900（比 #1b1b1f 略浅，增加层次对比） */
-  --tw-prose-invert-th-borders: #4b5563;
-  --tw-prose-invert-td-borders: #374151;    /* 表格边框：gray-700 */
+  --tw-prose-invert-body: #d1d5dbd9; /* 正文：gray-300，舒适可读 */
+  --tw-prose-invert-headings: #60a5fad9; /* 标题：blue-400（接近你的 blue-500，但稍柔和） */
+  --tw-prose-invert-lead: #9ca3afd9; /* lead 段落 */
+  --tw-prose-invert-links: #93c5fd9; /* 链接：blue-300，突出 */
+  --tw-prose-invert-bold: #f3f4f6d9; /* 加粗文字：接近 white */
+  --tw-prose-invert-counters: #9ca3afd9; /* 编号/项目符号 */
+  --tw-prose-invert-bullets: #9ca3afd9; /* 列表符号 */
+  --tw-prose-invert-hr: #4b5563d9; /* 分隔线：gray-600 */
+  --tw-prose-invert-quotes: #9ca3afd9; /* 引用文字 */
+  --tw-prose-invert-quote-borders: #4b5563d9; /* 引用边框 */
+  --tw-prose-invert-code: #f472b6d9; /* 行内代码：pink-400 */
+  --tw-prose-invert-pre-code: #e5e7ebd9; /* 代码块内文字：gray-200 */
+  --tw-prose-invert-pre-bg: #111827d9; /* 代码块背景：gray-900（比 #1b1b1f 略浅，增加层次对比） */
+  --tw-prose-invert-th-borders: #4b5563d9; /* 表格表头边框：gray-600 */
+  --tw-prose-invert-td-borders: #374151d9; /* 表格边框：gray-700 */
+  --tw-prose-invert-p: #ffffffd9; /* 段落文字：gray-700 */
 }
 
 @layer utilities {

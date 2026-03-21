@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "米莱峰博客",
-  description: "这是米莱峰前端技术分析博客",
+  description: "分享前端技术知识",
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
       >
         <Providers>
           <Header />
-          <main className="max-w-6xl p-18 min-h-screen mx-auto px-6">
+          <main className="max-w-5xl p-18 min-h-screen mx-auto px-6">
             {children}
           </main>
           <Footer />

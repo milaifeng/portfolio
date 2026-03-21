@@ -1,0 +1,121 @@
+---
+title: useState
+description: React中的useState的常用用法以及注意事项。
+date: 2026-3-18
+tags: React,Hooks
+---
+
+#### 1. 简介
+
+**useState** 是 React 最基础、最常用的 **Hook**，它允许你在**函数组件**中“记住”一些值（状态），并在状态变化时触发组件重新渲染。
+
+```tsx
+import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>计数：{count}</p>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+      <button onClick={() => setCount(count - 1)}>-1</button>
+      <button onClick={() => setCount(0)}>重置</button>
+    </div>
+  );
+}
+```
+
+**useState** 返回一个数组，包含两个元素：当前状态值和更新状态的函数。上面的例子中，我们用一个变量 **count** 来存储当前的计数，并用另一个函数 **setCount** 来改变这个计数的值。当我们点击+1按钮时，**setCount(count + 1)** 会被调用，这会触发组件重新渲染，并更新 **count**的值为原来的值加一。
+
+#### 2. 注意事项
+
+##### 2.1 直接修改状态值
+
+直接修改状态值是不允许的，例如：
+
+```tsx
+const [list, setList] = useState([1, 2, 3]);
+list.push(4); // 直接 mutation
+setList(list); // React 检测不到变化，不会重新渲染
+```
+
+正确的做法是使用更新函数：
+
+```tsx
+setList((prevList) => [...prevList, 4]); // 使用更新函数，React会检测到变化并重新渲染
+```
+
+##### 2.2 异步更新问题
+
+在函数式组件中，如果你在一个事件处理函数里更新了状态，然后又立即读取这个新状态的值你可能会得到旧的状态值。
+请看下面的例子：
+
+```tsx
+import { useState } from "react";
+function App() {
+  const [index, setIndex] = useState(0);
+  const heandleClick = () => {
+    setIndex(index + 1);
+    console.log(index, "index"); //0
+  };
+  return (
+    <>
+      <h1>Index:{index}</h1>
+      <button onClick={heandleClick}>更改值</button>
+    </>
+  );
+}
+export default App;
+```
+
+此时**h1**中的值更新为1。但是我们打印出来的index依然是0，这是因为我们正常写的代码是同步的，而**useState**返回的 **setIndex**函数是异步的。所以先执行了我们的打印语句，再去执行**setIndex(index + 1)**。
+
+这么做的原因是为了性能优化，React会将多个状态更新合并为一次渲染。例如：
+
+```tsx
+import { useState } from "react";
+function App() {
+  const [index, setIndex] = useState(0);
+  const heandleClick = () => {
+    setIndex(index + 1); //1
+    setIndex(index + 2); //2
+    setIndex(index + 3); //3
+    console.log(index, "index");
+  };
+  return (
+    <>
+      <h1>Index:{index}</h1>
+      <button onClick={heandleClick}>更改值</button>
+    </>
+  );
+}
+export default App;
+```
+
+此时打印出来的index依然是0，但是**h1**中的值会是3。这是因为React会将多个状态更新合并为一次渲染，所以最后一次更新会覆盖之前的更新。相当于执行了一次**setIndex(0 + 3)**。为了解决这个问题，你可以使用更新函数：
+
+```tsx
+import { useState } from "react";
+function App() {
+  const [index, setIndex] = useState(0);
+  const heandleClick = () => {
+    setIndex((prevIndex) => prevIndex + 1); //1
+    setIndex((prevIndex) => prevIndex + 2); //3
+    setIndex((prevIndex) => prevIndex + 3); //6
+    console.log(index, "index");
+  };
+  return (
+    <>
+      <h1>Index:{index}</h1>
+      <button onClick={heandleClick}>更改值</button>
+    </>
+  );
+}
+export default App;
+```
+
+1. prevIndex => prevIndex + 1 将接收 0 作为待定状态，并返回 1 作为下一个状态。
+2. prevIndex => prevIndex + 2 将接收 1 作为待定状态，并返回 3 作为下一个状态。
+3. prevIndex => prevIndex + 3 将接收 3 作为待定状态，并返回 6 作为下一个状态。
+   现在没有其他排队的更新，因此 `h1`中的值是6。这是因为我们使用了更新函数，所以每次更新都是基于最新的状态值进行的。

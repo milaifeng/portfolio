@@ -145,7 +145,7 @@ const Terminal = () => {
 
   return (
     <div
-      className="w-full max-w-2xl bg-white dark:bg-neutral-900 p-4 rounded-2xl shadow focus-within:shadow-xl border border-neutral-200 dark:border-neutral-800"
+      className="w-full max-w-130 bg-white dark:bg-neutral-900 p-4 rounded-2xl shadow focus-within:shadow-xl border border-neutral-200 dark:border-neutral-800"
       onClick={() => editableRef.current?.focus()}
       tabIndex={-1}
     >

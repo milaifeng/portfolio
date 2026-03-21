@@ -1,10 +1,10 @@
 import Image from "next/image";
 import user from "@/public/user.jpg";
-import { Mail, BookOpen, Github} from "lucide-react";
+import { Mail, BookOpen, Github } from "lucide-react";
 import Link from "next/link";
 const InfoCard = () => {
   return (
-    <div className="h-86 w-64 border border-neutral-200 dark:border-neutral-800 bg-white  dark:bg-neutral-900 shadow-md p-6 rounded-xl flex flex-col items-center gap-2">
+    <div className="hidden md:flex h-86 w-60 border border-neutral-200 dark:border-neutral-800 bg-white  dark:bg-neutral-900 shadow-md p-6 rounded-xl flex-col items-center gap-2">
       <Image
         src={user}
         alt="头像"

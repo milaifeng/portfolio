@@ -1,4 +1,4 @@
-export const revalidate = 43200; //12小时
+export const revalidate = 3600; //1小时
 
 import Terminal from "@/components/home/Terminal";
 import InfoCard from "@/components/home/InfoCard";
@@ -14,7 +14,7 @@ export default async function Home() {
       </section>
       <div className="border-t border-neutral-300 dark:border-neutral-700 p-4 mb-12">
         <h2 className="my-8 text-2xl font-semibold">最新文章</h2>
-        <div className="grid  grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-6">
           {blogPosts.map((post) => (
             <BlogsCard
               key={post.slug}

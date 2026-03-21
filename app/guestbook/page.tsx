@@ -5,7 +5,6 @@ import DiscussCard from "@/components/guestbook/DiscussCard";
 import SignStatusCard from "@/components/SignStatusCard";
 import UserInfoCard from "@/components/UserInfoCard";
 import Link from "next/link";
-import { set } from "date-fns";
 
 interface Comment {
   id: number;
@@ -219,7 +218,7 @@ const GuesbookPage = () => {
           </p>
           <p className="text-md">在这里留下您的足迹吧！</p>
         </div>
-        <div className="w-2xl h-52 border bg-white border-neutral-300 rounded-lg dark:bg-white p-4">
+        <div className="w-full max-w-2xl h-52 border bg-white border-neutral-300 rounded-lg dark:bg-white/90 p-4">
           <form className="flex flex-col h-full">
             {replyToId && (
               <div className="mb-2 p-2 bg-blue-50 rounded text-sm flex justify-end items-center">
@@ -233,7 +232,7 @@ const GuesbookPage = () => {
               </div>
             )}
             <textarea
-              className="w-full h-32 p-4 rounded-lg bg-neutral-300/20 resize-none outline-none border border-transparent focus:border-blue-400 text-neutral-500"
+              className="w-full h-32 p-4 rounded-lg bg-neutral-300/20 dark:bg-neutral-500/20 resize-none outline-none border border-transparent focus:border-blue-400 text-neutral-500"
               placeholder={replyToId ? "回复" : "说点什么吧..."}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
