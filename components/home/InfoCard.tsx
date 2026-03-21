@@ -23,7 +23,7 @@ const InfoCard = () => {
           <Github size={24} className="w-6 h-6 text-neutral-500" />
         </Link>
         <Link
-          href="https://mail.google.com/"
+          href="https://mail.qq.com/"
           className="w-full h-10 flex justify-center items-center"
         >
           <Mail size={24} className="w-6 h-6 text-neutral-500" />
